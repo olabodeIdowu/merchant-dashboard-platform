@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
+*.env
 backend/.env
 frontend/merchant-dashboard-frontend/.env
 
