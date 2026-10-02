@@ -68,8 +68,7 @@ This project demonstrates a scalable merchant-facing platform built with a modul
 
 ```bash
 git clone https://github.com/olabodeIdowu/merchant-dashboard-platform.git
-cd merchant-dashboard-platform
-cp .env.example .env
+cd merchant-dashboard-platform/backend
 docker-compose up --build
 
 Frontend: http://localhost:3000  
