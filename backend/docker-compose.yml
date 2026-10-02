@@ -1,7 +1,9 @@
-version: "3.8"
+version: "3.9"
+
 services:
   mysql:
     image: mysql:8.0
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: merchant_db
@@ -9,6 +11,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   redis:
     image: redis:7-alpine
@@ -19,7 +22,16 @@ services:
     build: ./backend
     ports:
       - "4000:4000"
-    env_file: .env
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=merchant_db
+      - REDIS_URL=redis://redis:6379
+      - JWT_ACCESS_SECRET=super-access-secret
+      - JWT_REFRESH_SECRET=super-refresh-secret
     depends_on:
       - mysql
       - redis
